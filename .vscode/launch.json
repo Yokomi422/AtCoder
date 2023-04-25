@@ -1,0 +1,22 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "(LLDB) Debug",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${fileDirname}/${fileBasenameNoExtension}",
+      "args": [],
+      "cwd": "${fileDirname}/",
+      "preLaunchTask": "clang++ build active file"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/tsukadarei/Desktop/AtCoder/C++/abc/abc245/d",
+      "program": "/Users/tsukadarei/Desktop/AtCoder/C++/abc/abc245/d/build/Debug/outDebug"
+    }
+  ]
+}
