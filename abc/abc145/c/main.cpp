@@ -40,16 +40,32 @@ struct Edge {
     ll w;
     Edge(int to, ll w) : to(to),w(w) {};
 };
+//階乗
+int factorial(int n) {
+    if (n == 0) return 1;
+    return factorial(n-1) * n;
+}
 
 int main() {
     int n; cin >> n;
     long double sm = 0;
     vector<int> x(n), y(n);
     rep(i,0,n) cin >> x[i] >> y[i];
-    int first_x = 0, first_y = 0;
+    int prev_x = 0, prev_y = 0;
     //順列全探索をするための配列を作る
     vector<int> N(n);
     rep(i,0,n) N[i] = i;
     //順列全探索
-    
+    do {
+        rep(i,0,n) {
+            if (i == 0) {
+                prev_x = x[N[i]]; prev_y = y[N[i]];
+                continue;
+            }
+            long double d = (x[N[i]] - prev_x)*(x[N[i]] - prev_x) + (y[N[i]] - prev_y)*(y[N[i]] - prev_y);
+            sm += sqrt(d);
+        }
+    }
+    while (next_permutation(N.begin(), N.end()));
+    cout << fixed << setprecision(10) << sm / factorial(n)  << endl;
 }
