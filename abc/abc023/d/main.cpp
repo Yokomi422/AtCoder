@@ -40,10 +40,16 @@ vector<ll> h;
 vector<ll> s;
 
 bool check(ll mid) {
+    vector<ll> time(n);
     rep(i,0,n) {
-        vector<bool> shooted(n,false);
-        
+        if (h[i] > mid) return false;
+        time[i] = (mid - h[i]) / s[i];
     }
+    sort(time.begin(), time.end());
+    rep(i,0,n) {
+        if (i > time[i]) return false;
+    }
+    return true;
 }
 
 int main() {
@@ -54,6 +60,8 @@ int main() {
     ll ng = 0, ok = INF;
     while (ok - ng > 1) {
         ll mid = (ok + ng) / 2;
-
+        if (check(mid)) ok = mid;
+        else ng = mid;
     }
+    cout << ok << endl;
 }

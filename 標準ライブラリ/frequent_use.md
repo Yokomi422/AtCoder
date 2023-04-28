@@ -20,3 +20,15 @@ vector<vector<long long>> comb(int n, int r) {
   }
   return v;
 }
+
+//役数の個数を求める
+int howManyDivisors(int n) {
+    int cnt = 0;
+    for (int i = 1; i * i <= n; i++) {
+        if (n%i == 0) {
+            cnt++;
+            if (i != n / i) cnt++;
+        }
+    }
+    return cnt;
+}

@@ -26,6 +26,8 @@ using ld = long double;
 const ld EPS = 1e-14;
 typedef pair<int, int> P;
 
+const ll INF = 1LL<<60;
+
 template<typename T> void chmax(T &a,T b) {
     if (a < b) a = b;
 }
@@ -34,36 +36,36 @@ template<typename T> void chmin(T &a,T b) {
 }
 
 struct Edge {
-    int from;
-    int to;
-    int cost;
+    ll from;
+    ll to;
+    ll cost;
+    Edge() : from(0), to(0), cost(0) {}
 };
 
 int main() {
-    int v,e,s,g; cin >> v >> e >> s >> g;
-    vector<int> dist(v);
-    //頂点の移動情報
-    vector<Edge> edges;
-    //???
-    fill(dist.begin(), dist.end(), 1e9);
-    dist[s] = 0;
+    int v,e,r; cin >> v >> e >> r;
+    //各頂点の最短距離
+    vector<ll> dist(v,INF);
+    dist[r] = 0;
     //辺の入力
+    vector<Edge> edges;
     rep(i,0,e) {
         struct Edge add;
-        //変数には.で入力する
         cin >> add.from >> add.to >> add.cost;
         edges.push_back(add);
     }
-    rep(i,0,v) {
-        rep(j,0,(int) edges.size()) {
-            struct Edge e = edges[j];
-            if (dist[e.from] != 1e9 && dist[e.to] > dist[e.from] + e.cost) {
-                dist[e.to] = dist[e.from] + e.cost;
-                if (i == v - 1) {
-                    break;
-                }
+    rep(i,0,v) rep(j,0,e) {
+        struct Edge e = edges[j];
+        if (dist[e.from] != INF && dist[e.to] > dist[e.from] + e.cost) {
+            dist[e.to] = dist[e.from] + e.cost;
+            if (i == v-1) {
+                cout << "NEGATIVE CYCLE" << endl;
+                return 0;
             }
         }
     }
-    //求める点への距離を出力
+    rep(i,0,v) {
+        if (dist[i] == INF) cout << "INF" << endl;
+        else cout << dist[i] << endl;
+    }
 }

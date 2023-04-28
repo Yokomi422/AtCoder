@@ -37,11 +37,13 @@ template<typename T> bool chmin(T &a,T b) {
     else return false;
 }
 
+//edgeの大きさが１の最短経路問題は幅優先探索
 struct Edge {
     int to;
     ll w;
     Edge(int to, int w) : to(to), w(w) {};
 };
+
 using Graph = vector<vector<Edge>>;
 
 
@@ -53,6 +55,8 @@ int main() {
         G[a].push_back(Edge(b,w));
     }
     // Dijkstra
+    //その点は最短距離ですか?
+    //幅優先探索の応用例
     vector<bool> visited(n,false);
     vector<ll> dist(n, 1e18);
     dist[s] = 0;
@@ -64,8 +68,9 @@ int main() {
         pq.pop();
         visited[now] = true;
         for (auto g: G[now]) {
-            if (!visited[g.to] && dist[g.to] + d < dist[g.to]) {
-                dist[g.to] = dist[g.to] + d;
+            if (!visited[g.to] && dist[now] + g.w < dist[g.to]) {
+                dist[g.to] = dist[now] + g.w;
+                pq.emplace(dist[g.to],g.to);
             } 
         } 
     }
