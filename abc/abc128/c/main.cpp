@@ -42,5 +42,30 @@ struct Edge {
 };
 
 int main() {
-    
+    int n,m; cin >> n >> m;
+    vector<vector<int>> S(m);
+    rep(i,0,m) {
+        int k; cin >> k;
+        rep(j,0,k) {
+            int s; cin >> s;
+            s--;
+            S[i].push_back(s);
+        }
+    }
+    vector<int> p(m);
+    rep(i,0,m) cin >> p[i];
+    int cnt = 0;
+    //1 << nですよ
+    for (int bit = 0; bit < 1 << n; bit++) {
+        bool flag = true;
+        rep(i,0,m) {
+            int num = 0;
+            rep(j,0,S[i].size()) {
+                if (bit & 1 << S[i][j]) num++;
+            }
+            if (num % 2 != p[i]) flag = false;
+        }
+        cnt += (flag ? 1 : 0);
+    }
+    cout << cnt << endl;
 }
