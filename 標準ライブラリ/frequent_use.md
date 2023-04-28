@@ -38,3 +38,13 @@ int factorial(int n) {
     if (n == 0) return 1;
     return factorial(n-1) * n;
 }
+
+//素数判定
+
+bool isPrime(int n) {
+    if (n == 1) return false;
+    for (int i = 2; i * i <= n; i++) {
+        if (n%i == 0) return false;
+    }
+    return true;
+}
