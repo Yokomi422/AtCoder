@@ -42,5 +42,8 @@ struct Edge {
 };
 
 int main() {
-    
+    int n; cin >> n;
+    string s; cin >> s;
+    if (s.find('|',0) < s.find('*',0) < s.find('|', s.find('|',0) + 1)) cout << "in" << endl;
+    else cout << "out" << endl;
 }

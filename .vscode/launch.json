@@ -15,8 +15,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/tsukadarei/Desktop/AtCoder/C++/abc/abc245/d",
-      "program": "/Users/tsukadarei/Desktop/AtCoder/C++/abc/abc245/d/build/Debug/outDebug"
+      "cwd": "/Users/tsukadarei/Desktop/AtCoder/C++",
+      "program": "/Users/tsukadarei/Desktop/AtCoder/C++/build/Debug/outDebug"
     }
   ]
 }

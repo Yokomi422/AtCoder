@@ -36,27 +36,36 @@ template<typename T> void chmin(T &a,T b) {
     if (a > b) a = b;
 }
 
-vector<pair<ll,ll>> prime_factorize(ll n) {
-    vector<pair<ll,ll>> res;
-    for (ll i = 2; i * i <= n; i++) {
-        if (n%i != 0) continue;
-        ll index = 0;
-        while (n%i == 0) {
-            index++;
-            n /= i;
-        }
-        res.emplace_back(i,index);
-    }
-    if (n != 1) res.emplace_back(n,1);
-    return res;
+// vector<pair<ll,ll>> prime_factorize(ll n) {
+//     vector<pair<ll,ll>> res;
+//     for (ll i = 2; i * i <= n; i++) {
+//         if (n%i != 0) continue;
+//         ll index = 0;
+//         while (n%i == 0) {
+//             index++;
+//             n /= i;
+//         }
+//         res.emplace_back(i,index);
+//     }
+//     if (n != 1) res.emplace_back(n,1);
+//     return res;
+// }
+
+ll F(ll a, ll b) {
+    string A = to_string(a);
+    string B = to_string(b);
+    return max(A.size(),B.size());
 }
   
 int main() {
     ll n; cin >> n;
-    ll ans = 0;
-    for (auto ps: prime_factorize(n)) {
-        ans *= ps.second%MOD;
-        ans = ans%MOD;
+    ll ans = INF;
+    for (ll i = 1; i * i <= n; i++) {
+        if (n % i == 0) {
+            ll a = i;
+            ll b = n / i;
+            chmin(ans,F(a,b));
+        }
     }
     cout << ans << endl;
 }

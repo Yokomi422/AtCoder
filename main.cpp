@@ -42,5 +42,9 @@ struct Edge {
 };
 
 int main() {
+    int n,l,k; cin >> n >> l >> k;
+    vector<int> a(n);
+    rep(i,0,n) cin >> a[i];
+    int left = 0, right = l;
     
 }

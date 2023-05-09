@@ -36,37 +36,33 @@ template<typename T> void chmin(T &a,T b) {
 }
 
 int main() {
-    int n, t;
-    cin >> n >> t;
+    int n,t; cin >> n >> t;
     vector<int> c(n);
     rep(i,0,n) cin >> c[i];
     vector<int> r(n);
     rep(i,0,n) cin >> r[i];
-    int ans = 1;
-    int mx = 0;
-    //tがあったか
-    bool ok = false;
-    //tがなかった時、対策
-    int sub_mx = r[0];
+    //勝者のid
+    int ans = 0;
+    int max = 0;
+    //Tが出なかった時用
     int sub_ans = 1;
+    int sub_max = r[0];
     rep(i,0,n) {
-        if (i > 0 && c[i] == c[0] && r[i] > sub_mx) {
-            if (r[i] > sub_mx) {
-                sub_mx = r[i];
-                sub_ans = i + 1;
-            }
-        }
         if (c[i] == t) {
-            ok = true;
-            if (mx < r[i]) {
-                mx = r[i];
+            if (max < r[i]) {
                 ans = i + 1;
+                chmax(max,r[i]);
             }
         }
+        if (i != 0) {
+            if (c[0] == c[i] && sub_max < r[i]) {
+                sub_ans = i + 1;
+                chmax(sub_max,r[i]);
+            } 
+        }
     }
-    if (!ok) {
+    if (ans == 0) {
         cout << sub_ans << endl;
-        return 0;
     }
-    cout << ans << endl;
+    else cout << ans << endl;
 }
