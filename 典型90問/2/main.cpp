@@ -41,5 +41,30 @@ struct Edge {
     Edge(int to, ll w) : to(to),w(w) {};
 };
 
+//n < 20 -> bit
+//( -> 0 ) -> 1
+
+bool judge(string s) {
+    int cnt = 0;
+    rep(i,0,s.size()) {
+        if (s[i] == '(') cnt++;
+        else cnt--;
+        if (cnt < 0) return false; 
+    }
+    if (cnt == 0) return true;
+    else return false;
+}
+
 int main() {
+    int n;
+    cin >> n;
+    if (n % 2 == 1) return 0;
+    for (int bit = 0; bit < (1 << n); bit++) {
+        string s = "";
+        for (int i = n - 1; i >= 0; i--) {
+            if (bit & 1 << i) s += ')';
+            else s += '(';
+        }
+        if (judge(s)) cout << s << endl;
+    }
 }
